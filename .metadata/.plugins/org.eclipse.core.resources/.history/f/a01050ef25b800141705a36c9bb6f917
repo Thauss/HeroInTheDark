@@ -1,0 +1,10 @@
+package heroes;
+
+public class Sacerdote extends Mago {
+
+	public Sacerdote(String nombre, int edad) {
+		super(nombre, edad);
+		// TODO Auto-generated constructor stub
+	}
+
+}

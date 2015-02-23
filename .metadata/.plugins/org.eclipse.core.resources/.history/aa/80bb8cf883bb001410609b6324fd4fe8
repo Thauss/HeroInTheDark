@@ -1,0 +1,36 @@
+package heroes;
+
+public class Sacerdote extends Mago {
+
+	public boolean curacion;
+	public boolean maldicion;
+	
+	public Sacerdote(String nombre, int edad, boolean baston, boolean varita, boolean curacion, boolean maldicion) {
+		super(nombre, edad, baston, varita);
+		this.curacion=curacion;
+		this.maldicion=maldicion;
+	}
+
+	@Override
+	public String toString() {
+		return super.toString()+"Sacerdote [curacion=" + curacion + ", maldicion=" + maldicion
+				+ ", baston=" + baston + ", varita=" + varita + "]";
+	}
+
+	public boolean isCuracion() {
+		return curacion;
+	}
+
+	public void setCuracion(boolean curacion) {
+		this.curacion = curacion;
+	}
+
+	public boolean isMaldicion() {
+		return maldicion;
+	}
+
+	public void setMaldicion(boolean maldicion) {
+		this.maldicion = maldicion;
+	}
+
+}

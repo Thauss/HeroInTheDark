@@ -1,0 +1,13 @@
+package juego;
+
+public class Menu {
+		public int opcion;
+	public Menu() {
+		// TODO Auto-generated constructor stub
+		System.out.println("Seleccione la opción que desee");
+		System.out.println("1.Creacion de personaje");
+		System.out.println("2.Records");
+		System.out.println("3.salir");
+	}
+
+}

@@ -1,0 +1,17 @@
+package objetos;
+
+public class Objeto {
+
+	protected String nombre;
+	protected int precio;
+	
+	
+	public Objeto(String nombre, int precio) {
+		super();
+		this.nombre = nombre;
+		this.precio = precio;
+	}
+	
+	
+
+}

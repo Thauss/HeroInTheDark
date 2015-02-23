@@ -1,0 +1,311 @@
+package juego;
+
+import heroes.Arcano;
+import heroes.Guerrero;
+import heroes.Humano;
+import heroes.Sacerdote;
+
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Scanner;
+
+import enemigos.EArquero;
+import enemigos.EGuerrero;
+import enemigos.Esqueleto;
+
+public class Main {
+	static ArrayList<Humano> personajes;
+
+	public static void main(String[] args) {
+		personajes = new ArrayList<Humano>();
+		menu();
+
+	}
+
+	public static void menu() {
+		int opcion = 0;
+		Scanner s = new Scanner(System.in);
+		Humano jugador = null;
+		do {
+			System.out.println("Que opción desea hacer?");
+			System.out.println("1.Crear personaje");
+			System.out.println("2.Seleccionar personaje");
+			System.out.println("3.Jugar");
+			System.out.println("4.Salir");
+			opcion = Entrada.entero();
+
+			switch (opcion) {
+			case 1:
+				crearpersonaje();
+
+				break;
+
+			case 2:
+				mostrarPersonaje();
+				jugador = seleccionarPersonaje(personajes);
+				break;
+
+			case 3:
+				jugar(new Guerrero("Pedro", 12, true, false));
+
+				break;
+
+			case 4:
+				System.out.println("Hasta luego");
+
+				break;
+
+			default:
+				break;
+			}
+
+		} while (opcion != 4);
+
+	}
+
+	private static Humano seleccionarPersonaje(ArrayList<Humano> ah) {
+		Humano j = null;
+		boolean b = false;
+
+		do {
+			System.out.println("Introduce el nombre del personaje a buscar");
+			String n = Entrada.cadena();
+			for (int i = 0; i < ah.size(); i++) {
+				if (ah.get(i).getNombre().equalsIgnoreCase(n)) {
+					j = ah.get(i);
+					b = true;
+					System.out.println("Has seleccionado a "
+							+ ah.get(i).toString());
+				}
+			}
+			if (!b) {
+				System.out.println("Nombre no encontrado");
+			}
+		} while (!b);
+
+		return j;
+	}
+
+	private static void jugar(Humano j) {
+		ArrayList<Esqueleto> n = new ArrayList<Esqueleto>();
+
+		Esqueleto e = null;
+		int cnt = 0;
+		e = crearEnemigo();
+		n.add(e);
+		do {
+			mostrarPantalla(j, e);
+			atacar(j, e);
+			if(e.getVida()<0){
+				cnt++;
+				jugar(j);
+			}else{
+				ataqueEnemigo(j, e);
+				mostrarPantalla(j, e);
+				cnt++;
+			}
+				
+		} while (j.getVida() > 0 || e.getVida()>0);
+		// }while(cnt<4);
+		if (j.getVida() > 0) {
+			System.out.println("Has ganado!");
+			jugar(j);
+			
+		}
+		else{
+			System.out.println("Has abatido a " + cnt + " enemigos");
+		}
+
+	}
+
+	private static Humano ataqueEnemigo(Humano j, Esqueleto e) {
+
+		j.setVida(j.getVida() - e.getAtaque());
+
+		return j;
+	}
+
+	private static Esqueleto atacar(Humano j, Esqueleto e) {
+
+		e.setVida(e.getVida() - j.getAtaque());
+
+		return e;
+	}
+
+	private static Esqueleto crearEnemigo() {
+		Esqueleto e = null;
+		int n;
+		Random r = new Random();
+		n = r.nextInt(2);
+
+		switch (n) {
+		case 0:
+			e = new Esqueleto();
+			break;
+		case 1:
+			e = new EArquero();
+			break;
+		case 2:
+			e = new EGuerrero();
+			break;
+
+		default:
+			break;
+		}
+		return e;
+	}
+
+	private static void mostrarPantalla(Humano j, Esqueleto e) {
+		System.out.println("===============================================");
+		System.out.println("   " + e.toString());
+		System.out.println("=");
+		System.out.println("=");
+		System.out.println("=");
+		System.out.println("=");
+		System.out.println("=");
+		System.out.println("=");
+		System.out.println("=");
+		System.out.println("=");
+		System.out.println("   " + j.toString());
+		System.out.println("=");
+		System.out.println("=");
+
+	}
+
+	private static void mostrarPersonaje() {
+		for (int i = 0; i < personajes.size(); i++) {
+			System.out.println(personajes.get(i));
+		}
+
+	}
+
+	public static void crearpersonaje() {
+		int o = 0;
+		String nombre, dato;
+		int edad;
+		boolean a = false;
+		boolean b = false;
+		boolean c = false;
+		boolean d = false;
+
+		Scanner s = new Scanner(System.in);
+		System.out.println("Que tipo desea ser?");
+		System.out.println("1.guerrero");
+		System.out.println("2.mago");
+		o = Entrada.entero();
+
+		switch (o) {
+		case 1:
+			System.out.println("Como se llama?");
+			nombre = Entrada.cadena();
+			System.out.println("Cuántos años tiene?");
+			edad = Entrada.entero();
+			do {
+				System.out.println("tiene espada?");
+				dato = Entrada.cadena();
+				if (dato.equalsIgnoreCase("Si")) {
+					a = true;
+					personajes.add(new Guerrero(nombre, edad, a, b));
+				} else if (dato.equalsIgnoreCase("no")) {
+					System.out.println("Entonces tiene un arco");
+					b = true;
+					personajes.add(new Guerrero(nombre, edad, a, b));
+				} else {
+					System.out.println("opción incorrecta");
+				}
+			} while (!(dato.equalsIgnoreCase("si") || dato
+					.equalsIgnoreCase("no")));
+
+			break;
+
+		case 2:
+			System.out.println("1.Arcano");
+			System.out.println("2.Sacerdote");
+			o = Entrada.entero();
+			switch (o) {
+			case 1:
+				System.out.println("Como se llama?");
+				nombre = Entrada.cadena();
+				System.out.println("Cuántos años tiene?");
+				edad = Entrada.entero();
+				do {
+					System.out.println("tiene bastón?");
+					dato = Entrada.cadena();
+					if (dato.equalsIgnoreCase("Si")) {
+						a = true;
+					} else if (dato.equalsIgnoreCase("no")) {
+						System.out.println("Entonces tiene una varita");
+						b = true;
+					} else {
+						System.out.println("opción incorrecta");
+					}
+				} while (!(dato.equalsIgnoreCase("si") || dato
+						.equalsIgnoreCase("no")));
+
+				do {
+					System.out.println("Es Arcano?");
+					dato = Entrada.cadena();
+					if (dato.equalsIgnoreCase("Si")) {
+						c = true;
+						personajes.add(new Arcano(nombre, edad, a, b, c, d));
+					} else if (dato.equalsIgnoreCase("no")) {
+						System.out.println("Entonces es de Hielo");
+						d = true;
+						personajes.add(new Arcano(nombre, edad, a, b, c, d));
+					} else {
+						System.out.println("opción incorrecta");
+					}
+				} while (!(dato.equalsIgnoreCase("si") || dato
+						.equalsIgnoreCase("no")));
+
+				break;
+
+			case 2:
+				System.out.println("Como se llama?");
+				nombre = Entrada.cadena();
+				System.out.println("Cuántos años tiene?");
+				edad = Entrada.entero();
+				do {
+					System.out.println("tiene bastón?");
+					dato = Entrada.cadena();
+					if (dato.equalsIgnoreCase("Si")) {
+						a = true;
+					} else if (dato.equalsIgnoreCase("no")) {
+						System.out.println("Entonces tiene una varita");
+						b = true;
+					} else {
+						System.out.println("opción incorrecta");
+					}
+				} while (!(dato.equalsIgnoreCase("si") || dato
+						.equalsIgnoreCase("no")));
+
+				do {
+					System.out.println("Cura?");
+					dato = Entrada.cadena();
+					if (dato.equalsIgnoreCase("Si")) {
+						c = true;
+						personajes.add(new Sacerdote(nombre, edad, a, b, c, d));
+					} else if (dato.equalsIgnoreCase("no")) {
+						System.out.println("Entonces Maldice");
+						d = true;
+						personajes.add(new Sacerdote(nombre, edad, a, b, c, d));
+					} else {
+						System.out.println("opción incorrecta");
+					}
+				} while (!(dato.equalsIgnoreCase("si") || dato
+						.equalsIgnoreCase("no")));
+
+				break;
+
+			default:
+				break;
+			}
+
+			break;
+
+		default:
+			break;
+		}
+	}
+
+}

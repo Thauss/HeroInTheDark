@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.util.Scanner"/>
+<fullyQualifiedTypeName name="heroes.Humano"/>
+<fullyQualifiedTypeName name="heroes.Guerrero"/>
+<fullyQualifiedTypeName name="heroes.Arcano"/>
+<fullyQualifiedTypeName name="enemigos.Esqueleto"/>
+<fullyQualifiedTypeName name="enemigos.EArquero"/>
+<fullyQualifiedTypeName name="enemigos.EGuerrero"/>
+<fullyQualifiedTypeName name="juego.Entrada"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="objetos.Pocion"/>
+<fullyQualifiedTypeName name="objetos.Objeto"/>
+</qualifiedTypeNameHistroy>

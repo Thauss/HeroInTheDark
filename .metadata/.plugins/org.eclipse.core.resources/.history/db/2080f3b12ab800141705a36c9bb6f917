@@ -1,0 +1,14 @@
+package heroes;
+
+public class Sacerdote extends Mago {
+
+	public boolean curacion;
+	public boolean maldicion;
+	
+	public Sacerdote(String nombre, int edad, boolean curacion, boolean maldicion) {
+		super(nombre, edad);
+		this.curacion=curacion;
+		this.maldicion=maldicion;
+	}
+
+}

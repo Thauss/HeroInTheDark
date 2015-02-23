@@ -1,0 +1,10 @@
+package objetos;
+
+public class Pocion extends Objeto {
+
+	public Pocion(String nombre, int cantidad) {
+		super(nombre, cantidad);
+		// TODO Auto-generated constructor stub
+	}
+
+}

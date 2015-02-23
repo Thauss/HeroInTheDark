@@ -1,0 +1,16 @@
+package heroes;
+
+public class Guerrero extends Humano {
+		private boolean escudo;
+		private boolean lanza;
+		private boolean hacha2h;
+		
+	
+	public Guerrero(String nombre, int edad) {
+		super(nombre, edad);
+		
+	}
+
+	
+
+}

@@ -1,0 +1,30 @@
+package heroes;
+
+import java.util.ArrayList;
+
+public class Humano {
+	
+		protected String nombre;
+		protected int edad;
+		protected int vida;
+		protected final int maxvida=20;
+		static ArrayList<objeto> inventario;
+		
+		
+		
+		public Humano(String nombre, int edad) {
+			super();
+			this.nombre = nombre;
+			this.edad = edad;
+			this.vida = maxvida;
+			this.inventario=inventario;
+		}
+		
+		public Humano() {
+			super();
+			this.nombre = "Thauss";
+			this.edad = 15;
+			this.vida = maxvida;
+		}
+				
+}

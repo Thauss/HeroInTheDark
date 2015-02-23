@@ -1,0 +1,9 @@
+package heroes;
+
+public class Guerrero extends Humano {
+
+	public Guerrero() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

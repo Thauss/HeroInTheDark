@@ -1,0 +1,9 @@
+package objetos;
+
+public class Objeto {
+
+	public Objeto() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

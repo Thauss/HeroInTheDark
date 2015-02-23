@@ -1,0 +1,14 @@
+package heroes;
+
+public class Mago extends Humano {
+	
+	static boolean baston;
+	static boolean varita;
+
+	public Mago(String nombre, int edad) {
+		super(nombre, edad);
+		this.baston=baston;
+		this.varita=varita;
+	}
+
+}

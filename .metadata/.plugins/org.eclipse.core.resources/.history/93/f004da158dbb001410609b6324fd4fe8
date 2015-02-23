@@ -1,0 +1,8 @@
+package enemigos;
+
+public class Esqueleto {
+	int vida;
+	final int vidamax=40;
+	int ataque=2;
+	
+}

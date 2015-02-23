@@ -1,0 +1,10 @@
+package heroes;
+
+public class Arcano extends Mago {
+
+	public Arcano(String nombre, int edad, boolean baston, boolean varita) {
+		super(nombre, edad, baston, varita);
+		// TODO Auto-generated constructor stub
+	}
+
+}

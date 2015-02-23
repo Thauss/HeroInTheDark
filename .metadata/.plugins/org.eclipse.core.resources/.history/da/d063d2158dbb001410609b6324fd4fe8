@@ -1,0 +1,9 @@
+package enemigos;
+
+public class EArquero extends Esqueleto {
+
+	public EArquero() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

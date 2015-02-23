@@ -1,0 +1,14 @@
+package heroes;
+
+public class Humano {
+		protected String nombre;
+		protected int edad;
+		
+		
+		public Humano(String nombre, int edad) {
+			super();
+			this.nombre = nombre;
+			this.edad = edad;
+		}
+		
+}

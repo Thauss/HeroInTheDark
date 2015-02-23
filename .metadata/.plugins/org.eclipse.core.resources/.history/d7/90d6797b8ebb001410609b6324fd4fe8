@@ -1,0 +1,14 @@
+package enemigos;
+
+public class Esqueleto {
+	int vida;
+	final int vidamax=40;
+	int ataque=2;
+	
+	public Esqueleto() {
+		super();
+		this.vida = 10;
+		this.ataque = 2;
+	}
+	
+}

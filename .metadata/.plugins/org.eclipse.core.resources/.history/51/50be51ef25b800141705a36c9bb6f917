@@ -1,0 +1,14 @@
+package heroes;
+
+public class Mago extends Humano {
+
+	public Mago(String nombre, int edad) {
+		super(nombre, edad);
+		// TODO Auto-generated constructor stub
+	}
+
+	public Mago() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

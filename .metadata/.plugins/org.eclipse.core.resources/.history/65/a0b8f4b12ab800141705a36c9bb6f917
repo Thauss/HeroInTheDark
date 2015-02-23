@@ -1,0 +1,16 @@
+package heroes;
+
+public class Guerrero extends Humano {
+		private boolean espada;
+		private boolean arco;
+		
+	
+	public Guerrero(String nombre, int edad) {
+		super(nombre, edad);
+		this.espada=espada;
+		this.arco=arco;
+	}
+
+	
+
+}

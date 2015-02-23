@@ -1,0 +1,14 @@
+package heroes;
+
+public class Guerrero extends Humano {
+
+	
+	
+	public Guerrero(String nombre, int edad, int vida) {
+		super(nombre, edad, vida);
+		// TODO Auto-generated constructor stub
+	}
+
+	
+
+}

@@ -1,0 +1,25 @@
+package heroes;
+
+public class Humano {
+	
+		protected String nombre;
+		protected int edad;
+		protected int vida;
+		protected final int maxvida=20;
+		
+		
+		public Humano(String nombre, int edad, int vida) {
+			super();
+			this.nombre = nombre;
+			this.edad = edad;
+			this.vida = vida;
+		}
+		
+		public Humano() {
+			super();
+			this.nombre = "Thauss";
+			this.edad = 15;
+			this.vida = 20;
+		}
+				
+}

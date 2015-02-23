@@ -1,0 +1,14 @@
+package heroes;
+
+public class Arcano extends Mago {
+
+	boolean fuego;
+	boolean hielo;
+	
+	public Arcano(String nombre, int edad, boolean fuego, boolean hielo) {
+		super(nombre, edad);
+		this.fuego=fuego;
+		this.hielo=hielo;
+	}
+
+}

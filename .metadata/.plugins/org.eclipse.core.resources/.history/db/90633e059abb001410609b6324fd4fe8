@@ -1,0 +1,10 @@
+package objetos;
+
+public class Bomba extends Objeto {
+
+	public Bomba(String nombre, int cantidad) {
+		super(nombre, cantidad);
+		// TODO Auto-generated constructor stub
+	}
+
+}
