@@ -1,0 +1,648 @@
+package juego;
+
+import heroes.Arcano;
+import heroes.Guerrero;
+import heroes.Humano;
+import heroes.Sacerdote;
+
+import java.awt.BorderLayout;
+import java.awt.Checkbox;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLayeredPane;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import javax.swing.ImageIcon;
+import javax.swing.JTextField;
+
+import java.awt.Color;
+import java.awt.Font;
+
+import javax.swing.JSeparator;
+
+import org.eclipse.wb.swing.FocusTraversalOnArray;
+
+import java.awt.Component;
+import java.util.ArrayList;
+
+import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.AbstractListModel;
+import javax.swing.JCheckBox;
+import javax.swing.JTree;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.JEditorPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JToggleButton;
+import javax.swing.JComboBox;
+
+import java.awt.FlowLayout;
+
+public class MainWindow extends JFrame {
+
+	private JLayeredPane VentanaMain;
+	private JButton btnCrearPersonaje;
+	private JButton btnJugar;
+	private JButton btnSeleccionarPersonaje;
+	private JTextField textField;
+	private JTextField txtHero;
+	private JLabel lblClase;
+	private JTextField txtClass;
+	private JPanel Ataque;
+	private JTextField n_enemigo;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	private JTextField textField_4;
+	private JTextField textField_5;
+	private JTextField txtCreaNom;
+	private JTextField txtCreaEdad;
+	private JCheckBox chckbxHielo;
+	private JPanel creacion;
+	private JCheckBox chckbxFuego;
+	private JCheckBox chckbxMago;
+	private JCheckBox chckbxArco;
+	private JCheckBox chckbxArcano;
+	private JCheckBox chckbxEspada;
+	private JCheckBox chckbxSacerdote;
+	private JCheckBox chckbxBastn;
+	private JCheckBox chckbxCura;
+	private JCheckBox chckbxVarita;
+	private JCheckBox chckbxGuerrero;
+	private JCheckBox chckbxMaldicin;
+	static ArrayList<Humano> personajes=new ArrayList<Humano>();
+	private JPanel seleccion;
+	private JLabel lblElegirPersonaje;
+	private JComboBox comboBox;
+	private JButton btnNewButton_1;
+	private JButton btnAtrs_1;
+	private JPanel panel;
+	private int n=-1;
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		personajes.add(new Guerrero("Thauss",25,true,false));
+		personajes.add(new Guerrero("Legolas",33,false,true));
+		personajes.add(new Arcano("Bastian",25,true,false,true,false));
+		personajes.add(new Sacerdote("Bastian",25,true,false,true,false));
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					MainWindow frame = new MainWindow();
+					frame.setVisible(true);
+					
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public MainWindow() {
+		setTitle("Hero in the Dark");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 549, 415);
+		VentanaMain = new JLayeredPane();
+		VentanaMain.setForeground(Color.GRAY);
+		VentanaMain.setBackground(Color.DARK_GRAY);
+		VentanaMain.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(VentanaMain);
+		VentanaMain.setLayout(null);
+		
+		 panel = new JPanel();
+		VentanaMain.setLayer(panel, 4);
+		panel.setBounds(0, 0, 533, 377);
+		VentanaMain.add(panel);
+		panel.setOpaque(true);
+		panel.setLayout(null);
+		
+
+
+		
+		JLabel lblHeroInThe = new JLabel("Hero in the Dark 2.0 Alpha Version");
+		lblHeroInThe.setBounds(55, 9, 165, 14);
+		panel.add(lblHeroInThe);
+		
+		
+		btnCrearPersonaje = new JButton("Crear Personaje");
+		btnCrearPersonaje.setBounds(333, 42, 150, 23);
+		panel.add(btnCrearPersonaje);
+		
+		btnSeleccionarPersonaje = new JButton("Seleccionar Personaje");
+		btnSeleccionarPersonaje.setBounds(333, 76, 150, 23);
+		panel.add(btnSeleccionarPersonaje);
+		
+		btnJugar = new JButton("Jugar");
+		btnJugar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VentanaMain.setLayer(Ataque, 5);
+				VentanaMain.setLayer(panel, 2);
+				VentanaMain.setLayer(seleccion, 2);
+				VentanaMain.setLayer(creacion, 2);
+				
+			}
+		});
+		btnJugar.setBounds(333, 323, 150, 43);
+		panel.add(btnJugar);
+		
+		JLabel imagen = new JLabel("");
+		imagen.setBounds(10, 28, 300, 343);
+		panel.add(imagen);
+		imagen.setIcon(new ImageIcon(MainWindow.class.getResource("/imagenes/Skeleton.gif")));
+		
+		JLabel lblHroeSeleccionado = new JLabel("H\u00E9roe seleccionado");
+		lblHroeSeleccionado.setBounds(113, 401, 93, 14);
+		panel.add(lblHroeSeleccionado);
+		
+		txtHero = new JTextField();
+		txtHero.setBounds(211, 398, 86, 20);
+		panel.add(txtHero);
+		txtHero.setText("Thauss");
+		txtHero.setColumns(10);
+		
+		lblClase = new JLabel("Clase");
+		lblClase.setBounds(302, 401, 26, 14);
+		panel.add(lblClase);
+		
+		txtClass = new JTextField();
+		txtClass.setBounds(333, 398, 86, 20);
+		panel.add(txtClass);
+		txtClass.setText("Guerrero");
+		txtClass.setColumns(10);
+		
+		btnSeleccionarPersonaje.addActionListener(new ActionListener() {
+			@SuppressWarnings("unchecked")
+			public void actionPerformed(ActionEvent e) {
+				VentanaMain.setLayer(panel, 2);
+				VentanaMain.setLayer(seleccion, 5);
+				VentanaMain.setLayer(creacion, 2);
+				VentanaMain.setLayer(Ataque, 2);
+				comboBox.removeAllItems();
+				for (int i = 0; i < personajes.size(); i++) {
+					
+							
+							comboBox.addItem(personajes.get(i).getNombre()+" Clase: "+personajes.get(i).getClass());
+							
+					
+					
+				}
+				
+				
+			}
+		});
+		btnCrearPersonaje.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VentanaMain.setLayer(creacion, 5);
+				VentanaMain.setLayer(panel, 2);
+				VentanaMain.setLayer(seleccion, 2);
+				VentanaMain.setLayer(Ataque, 2);
+				creacion.setVisible(true);
+				
+			}
+		});
+		
+		Ataque = new JPanel();
+		Ataque.setForeground(Color.GRAY);
+		Ataque.setBounds(0, 0, 533, 377);
+		VentanaMain.add(Ataque);
+		VentanaMain.setLayer(Ataque, 3);
+		Ataque.setOpaque(true);
+		
+		
+		JLabel lblEnemigo = new JLabel("Enemigo");
+		lblEnemigo.setFont(new Font("Old English Text MT", Font.PLAIN, 16));
+		lblEnemigo.setBounds(10, 55, 63, 14);
+		Ataque.add(lblEnemigo);
+		
+		n_enemigo = new JTextField();
+		n_enemigo.setEnabled(false);
+		n_enemigo.setBounds(83, 55, 160, 20);
+		Ataque.add(n_enemigo);
+		n_enemigo.setColumns(10);
+		
+		JLabel lblAtaque = new JLabel("Ataque");
+		lblAtaque.setFont(new Font("Old English Text MT", Font.PLAIN, 16));
+		lblAtaque.setBounds(123, 87, 46, 14);
+		Ataque.add(lblAtaque);
+		
+		textField_1 = new JTextField();
+		textField_1.setEnabled(false);
+		textField_1.setBounds(83, 86, 30, 20);
+		Ataque.add(textField_1);
+		textField_1.setColumns(10);
+		
+		JLabel lblSalud = new JLabel("Salud");
+		lblSalud.setFont(new Font("Old English Text MT", Font.PLAIN, 16));
+		lblSalud.setBounds(10, 87, 46, 14);
+		Ataque.add(lblSalud);
+		
+		textField_2 = new JTextField();
+		textField_2.setEnabled(false);
+		textField_2.setBounds(179, 86, 30, 20);
+		Ataque.add(textField_2);
+		textField_2.setColumns(10);
+		
+		JLabel lblHeroe = new JLabel("Heroe");
+		lblHeroe.setFont(new Font("Viner Hand ITC", Font.PLAIN, 18));
+		lblHeroe.setBounds(10, 226, 56, 26);
+		Ataque.add(lblHeroe);
+		
+		textField_3 = new JTextField();
+		textField_3.setEnabled(false);
+		textField_3.setBounds(76, 228, 86, 20);
+		Ataque.add(textField_3);
+		textField_3.setColumns(10);
+		
+		JLabel lblSalud_1 = new JLabel("Salud");
+		lblSalud_1.setFont(new Font("Viner Hand ITC", Font.PLAIN, 14));
+		lblSalud_1.setBounds(10, 263, 46, 14);
+		Ataque.add(lblSalud_1);
+		
+		textField_4 = new JTextField();
+		textField_4.setEnabled(false);
+		textField_4.setBounds(76, 259, 30, 20);
+		Ataque.add(textField_4);
+		textField_4.setColumns(10);
+		
+		JLabel lblAtaque_1 = new JLabel("Ataque");
+		lblAtaque_1.setFont(new Font("Viner Hand ITC", Font.PLAIN, 14));
+		lblAtaque_1.setBounds(10, 294, 56, 14);
+		Ataque.add(lblAtaque_1);
+		
+		textField_5 = new JTextField();
+		textField_5.setEnabled(false);
+		textField_5.setColumns(10);
+		textField_5.setBounds(76, 290, 30, 20);
+		Ataque.add(textField_5);
+		
+		JButton btnNewButton = new JButton("Atacar!");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton.setBounds(10, 319, 89, 23);
+		Ataque.add(btnNewButton);
+		
+		JButton btnObjeto = new JButton("Objeto");
+		btnObjeto.setBounds(109, 319, 89, 23);
+		Ataque.add(btnObjeto);
+		
+		JButton btnSalir = new JButton("Salir");
+		btnSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				volver();
+			}
+		});
+		btnSalir.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnSalir.setBounds(467, 343, 56, 23);
+		Ataque.add(btnSalir);
+		
+		JSeparator separator = new JSeparator();
+		separator.setBounds(0, 182, 543, 2);
+		Ataque.add(separator);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(MainWindow.class.getResource("/imagenes/warrior.png")));
+		lblNewLabel.setBounds(284, 195, 148, 147);
+		Ataque.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(MainWindow.class.getResource("/imagenes/enemy.jpg")));
+		lblNewLabel_1.setBounds(284, 13, 214, 158);
+		Ataque.add(lblNewLabel_1);
+		
+		creacion = new JPanel();
+		VentanaMain.setLayer(creacion, 2);
+		creacion.setBounds(0, 0, 533, 377);
+		VentanaMain.add(creacion);
+		creacion.setLayout(null);
+		
+		JLabel lblNombre = new JLabel("Nombre");
+		lblNombre.setFont(new Font("Viner Hand ITC", Font.PLAIN, 22));
+		lblNombre.setBounds(10, 61, 80, 28);
+		creacion.add(lblNombre);
+		
+		JLabel lblCreacinDePersonaje = new JLabel("CREACI\u00D3N DE PERSONAJE");
+		lblCreacinDePersonaje.setFont(new Font("Old English Text MT", Font.ITALIC, 24));
+		lblCreacinDePersonaje.setBounds(70, 11, 395, 28);
+		creacion.add(lblCreacinDePersonaje);
+		
+		txtCreaNom = new JTextField();
+		txtCreaNom.setBounds(114, 65, 156, 20);
+		creacion.add(txtCreaNom);
+		txtCreaNom.setColumns(10);
+		
+		JLabel lblEdad = new JLabel("Edad");
+		lblEdad.setFont(new Font("Viner Hand ITC", Font.PLAIN, 22));
+		lblEdad.setBounds(10, 117, 80, 28);
+		creacion.add(lblEdad);
+		
+		JLabel lblClase_1 = new JLabel("Clase");
+		lblClase_1.setFont(new Font("Viner Hand ITC", Font.PLAIN, 22));
+		lblClase_1.setBounds(10, 175, 80, 28);
+		creacion.add(lblClase_1);
+		
+		chckbxGuerrero = new JCheckBox("Guerrero");
+		chckbxGuerrero.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(chckbxGuerrero.isSelected()){
+					chckbxEspada.setVisible(true);
+					chckbxArco.setVisible(true);	
+				}
+			}
+		});
+		chckbxGuerrero.setBounds(114, 178, 69, 23);
+		creacion.add(chckbxGuerrero);
+		
+		chckbxMago = new JCheckBox("Mago");
+		chckbxMago.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				chckbxBastn.setVisible(true);
+				chckbxVarita.setVisible(true);
+			}
+		});
+		chckbxMago.setBounds(114, 215, 80, 23);
+		creacion.add(chckbxMago);
+		
+		chckbxArcano = new JCheckBox("Arcano");
+		chckbxArcano.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				chckbxFuego.setVisible(true);
+				chckbxHielo.setVisible(true);
+			}
+		});
+		chckbxArcano.setBounds(274, 215, 80, 23);
+		creacion.add(chckbxArcano);
+		chckbxArcano.setVisible(false);
+		
+		chckbxSacerdote = new JCheckBox("Sacerdote");
+		chckbxSacerdote.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				chckbxMaldicin.setVisible(true);
+				chckbxCura.setVisible(true);
+			}
+		});
+		chckbxSacerdote.setBounds(274, 251, 80, 23);
+		creacion.add(chckbxSacerdote);
+		chckbxSacerdote.setVisible(false);
+		
+		chckbxFuego = new JCheckBox("Fuego");
+		chckbxFuego.setBounds(356, 215, 64, 23);
+		creacion.add(chckbxFuego);
+		chckbxFuego.setVisible(false);
+		
+		chckbxHielo = new JCheckBox("Hielo");
+		chckbxHielo.setBounds(422, 215, 56, 23);
+		creacion.add(chckbxHielo);
+		chckbxHielo.setVisible(false);
+		
+		chckbxBastn = new JCheckBox("Bast\u00F3n");
+		chckbxBastn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				chckbxArcano.setVisible(true);
+				chckbxSacerdote.setVisible(true);
+			}
+		});
+		chckbxBastn.setBounds(192, 215, 80, 23);
+		creacion.add(chckbxBastn);
+		chckbxBastn.setVisible(false);
+		
+		chckbxVarita = new JCheckBox("Varita");
+		chckbxVarita.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				chckbxArcano.setVisible(true);
+				chckbxSacerdote.setVisible(true);
+			}
+		});
+		chckbxVarita.setBounds(192, 251, 80, 23);
+		creacion.add(chckbxVarita);
+		chckbxVarita.setVisible(false);
+		
+		chckbxCura = new JCheckBox("Cura");
+		chckbxCura.setBounds(356, 251, 64, 23);
+		creacion.add(chckbxCura);
+		chckbxCura.setVisible(false);
+		
+		chckbxMaldicin = new JCheckBox("Maldici\u00F3n");
+		chckbxMaldicin.setBounds(422, 251, 80, 23);
+		chckbxMaldicin.setVisible(false);
+		creacion.add(chckbxMaldicin);
+		
+		chckbxEspada = new JCheckBox("Espada");
+		chckbxEspada.setBounds(190, 178, 80, 23);
+		creacion.add(chckbxEspada);
+		chckbxEspada.setVisible(false);
+		
+		chckbxArco = new JCheckBox("Arco");
+		chckbxArco.setBounds(272, 178, 50, 23);
+		creacion.add(chckbxArco);
+		chckbxArco.setVisible(false);
+		
+		txtCreaEdad = new JTextField();
+		txtCreaEdad.setBounds(114, 121, 45, 20);
+		creacion.add(txtCreaEdad);
+		txtCreaEdad.setColumns(10);
+		
+		JButton btnConf = new JButton("Confirmar");
+		btnConf.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(chckbxGuerrero.isEnabled()){
+					if (chckbxEspada.isEnabled()) {
+						personajes.add(new Guerrero(txtCreaNom.getText(), Integer.valueOf(txtCreaEdad.getText()), true, false));
+					}
+					if(chckbxArco.isEnabled()){
+						personajes.add(new Guerrero(txtCreaNom.getText(), Integer.valueOf(txtCreaEdad.getText()), false, true));
+					}
+				}
+				else{
+					if(chckbxMago.isEnabled()){
+						if (chckbxBastn.isEnabled()) {
+							if (chckbxArcano.isEnabled()) {
+								if (chckbxFuego.isEnabled()) {
+									personajes.add(new Arcano(txtCreaNom.getText(), Integer.valueOf(txtCreaEdad.getText()), true, false, true, false));
+								}
+								if (chckbxHielo.isEnabled()) {
+									personajes.add(new Arcano(txtCreaNom.getText(), Integer.valueOf(txtCreaEdad.getText()), true, false, false, true));
+								}
+							}
+							if (chckbxSacerdote.isEnabled()) {
+								if (chckbxCura.isEnabled()) {
+									personajes.add(new Arcano(txtCreaNom.getText(), Integer.valueOf(txtCreaEdad.getText()), true, false, true, false));
+								}
+								if (chckbxMaldicin.isEnabled()) {
+									personajes.add(new Arcano(txtCreaNom.getText(), Integer.valueOf(txtCreaEdad.getText()), true, false, false, true));
+								}
+							}
+						}
+						else{
+							if (chckbxVarita.isEnabled()) {
+								if (chckbxArcano.isEnabled()) {
+									if (chckbxFuego.isEnabled()) {
+										personajes.add(new Arcano(txtCreaNom.getText(), Integer.valueOf(txtCreaEdad.getText()), false, true, true, false));
+									}
+									if (chckbxHielo.isEnabled()) {
+										personajes.add(new Arcano(txtCreaNom.getText(), Integer.valueOf(txtCreaEdad.getText()), false, true, false, true));
+									}
+								}
+								if (chckbxSacerdote.isEnabled()) {
+									if (chckbxCura.isEnabled()) {
+										personajes.add(new Arcano(txtCreaNom.getText(), Integer.valueOf(txtCreaEdad.getText()), false, true, true, false));
+									}
+									if (chckbxMaldicin.isEnabled()) {
+										personajes.add(new Arcano(txtCreaNom.getText(), Integer.valueOf(txtCreaEdad.getText()), false, true, false, true));
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		});
+		btnConf.setBounds(115, 311, 155, 36);
+		creacion.add(btnConf);
+		
+		JButton btnAtrs = new JButton("Atr\u00E1s");
+		btnAtrs.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VentanaMain.setLayer(panel, 5);
+				volver();
+			}
+
+		});
+		btnAtrs.setBounds(310, 311, 155, 36);
+		creacion.add(btnAtrs);
+		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon(MainWindow.class.getResource("/imagenes/herocreation.png")));
+		label.setBounds(328, 61, 175, 142);
+		creacion.add(label);
+		
+		seleccion = new JPanel();
+		VentanaMain.setLayer(seleccion, 1);
+		seleccion.setBounds(0, 0, 533, 377);
+		VentanaMain.add(seleccion);
+		seleccion.setLayout(null);
+
+		
+		
+		
+		lblElegirPersonaje = new JLabel("ELEGIR PERSONAJE");
+		lblElegirPersonaje.setFont(new Font("Old English Text MT", Font.ITALIC, 24));
+		lblElegirPersonaje.setBounds(24, 37, 328, 54);
+		seleccion.add(lblElegirPersonaje);
+		
+		comboBox = new JComboBox();
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				
+			}
+		});
+		comboBox.setBounds(24, 115, 479, 20);
+		seleccion.add(comboBox);
+		
+		btnNewButton_1 = new JButton("Ok");
+		btnNewButton_1.setBounds(87, 309, 102, 43);
+		seleccion.add(btnNewButton_1);
+		
+		btnAtrs_1 = new JButton("Atr\u00E1s");
+		btnAtrs_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				volver();
+			}
+		});
+		btnAtrs_1.setBounds(339, 309, 102, 43);
+		seleccion.add(btnAtrs_1);
+		
+		VentanaMain.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{lblHeroInThe, btnCrearPersonaje, btnSeleccionarPersonaje, btnJugar, imagen, lblHroeSeleccionado, txtHero, lblClase, txtClass, Ataque, lblEnemigo, n_enemigo, lblAtaque, textField_1, lblSalud, textField_2, lblHeroe, textField_3, lblSalud_1, textField_4, lblAtaque_1, textField_5, btnNewButton, btnObjeto, btnSalir, separator, lblNewLabel, lblNewLabel_1}));
+		
+	}
+	protected void volver() {
+		VentanaMain.setLayer(panel, 5);
+		VentanaMain.setLayer(seleccion, 2);
+		VentanaMain.setLayer(creacion, 2);
+		VentanaMain.setLayer(Ataque, 2);
+	}
+
+	public JButton getBtnCrearPersonaje() {
+		return btnCrearPersonaje;
+	}
+	public JButton getBtnJugar() {
+		return btnJugar;
+	}
+	public JButton getBtnListarPersonajes() {
+		return getBtnListarPersonajes();
+	}
+	public JButton getBtnSeleccionarPersonaje() {
+		return btnSeleccionarPersonaje;
+	}
+	public JTextField getTxtClass() {
+		return txtClass;
+	}
+	public JTextField getTxtHero() {
+		return txtHero;
+	}
+	public JCheckBox getChckbxHielo() {
+		return chckbxHielo;
+	}
+	public JPanel getCreacion() {
+		return creacion;
+	}
+	public JCheckBox getChckbxFuego() {
+		return chckbxFuego;
+	}
+	public JCheckBox getChckbxMago() {
+		return chckbxMago;
+	}
+	public JCheckBox getChckbxArco() {
+		return chckbxArco;
+	}
+	public JCheckBox getChckbxArcano() {
+		return chckbxArcano;
+	}
+	public JCheckBox getChckbxEspada() {
+		return chckbxEspada;
+	}
+	public JCheckBox getChckbxSacerdote() {
+		return chckbxSacerdote;
+	}
+	public JCheckBox getChckbxBastn() {
+		return chckbxBastn;
+	}
+	public JCheckBox getChckbxCura() {
+		return chckbxCura;
+	}
+	public JCheckBox getChckbxVarita() {
+		return chckbxVarita;
+	}
+	public JCheckBox getChckbxGuerrero() {
+		return chckbxGuerrero;
+	}
+	public JCheckBox getChckbxMaldicin() {
+		return chckbxMaldicin;
+	}
+	public JComboBox getComboBox() {
+		return comboBox;
+	}
+	public JPanel getPanel_1() {
+		return seleccion;
+	}
+	public JPanel getPanel() {
+		return panel;
+	}
+}

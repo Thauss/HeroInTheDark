@@ -3,6 +3,7 @@ package heroes;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import objetos.Bomba;
 import objetos.Objeto;
 import objetos.Pocion;
 
@@ -14,7 +15,7 @@ public class Humano {
 		protected int ataque =4;
 		protected int defensa=3;
 		protected final int maxvida=20;
-		protected static ArrayList<Objeto> inventario;
+		protected static Objeto[] inventario=new Objeto[2];
 		
 		
 		
@@ -23,7 +24,8 @@ public class Humano {
 			this.nombre = nombre;
 			this.edad = edad;
 			this.vida = maxvida;
-			this.inventario=new ArrayList<Objeto>();
+			this.inventario[0]=new Pocion();
+			this.inventario[1]=new Bomba();
 		}
 		
 		public int getAtaque() {
@@ -66,11 +68,11 @@ public class Humano {
 			this.vida = vida;
 		}
 
-		public ArrayList<Objeto> getInventario() {
+		public Objeto[] getInventario() {
 			return inventario;
 		}
 
-		public static void setInventario(ArrayList<Objeto> inventario) {
+		public static void setInventario(Objeto[] inventario) {
 			Humano.inventario = inventario;
 		}
 
